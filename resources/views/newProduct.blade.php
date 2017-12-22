@@ -36,7 +36,8 @@
         @endif
         {{Form::open(array(
             'route'=>'new-product',
-            'method'=>'post'
+            'method'=>'post',
+            'files' => true,
         ))}}
             <div class="form-group">
                 {{ Form::label('title', 'Title') }}
@@ -67,6 +68,11 @@
                     '0.2'=>'20%',
                     '0.05'=>'5%'
                     )) }}
+            </div>
+
+            <div class="form-group">
+                {{ Form::label('file', 'Choose a picture') }}
+                {{ Form::file('file') }}
             </div>
 
             <div class="form-group">

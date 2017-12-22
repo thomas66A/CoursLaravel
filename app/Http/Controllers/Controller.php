@@ -83,12 +83,22 @@ class Controller extends BaseController
         $prix = $r['prix'];
         $tva = $r['tva'];
         $reference = $r['reference'];
+        $file = $r['file'];
+
+        $extension = $file->extension();
+        $time = date('U');
+        $originalName = $file->getClientOriginalName();
+        $name = hash('md5', $time.$originalName).".".$extension;
+
+        $file->move('uploads',$name);
+
 
         $produit = new Product();
         $produit->title = $title;
         $produit->description = $description;
         $produit->prix = $prix;
         $produit->tva = $tva;
+        $produit->picture = $name;
         $produit->reference = $reference;
         $produit->save();
         return redirect()->back()->with('message','Votre produit a était enregistré!!');
