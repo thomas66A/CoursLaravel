@@ -58,4 +58,8 @@ Route::get('/showproduct/{id?}', array(
     'as'=>'showProduct',
     'uses'=>'Controller@showProduct'
 ));
+Route::get('/session', array(
+    'as'=>'session',
+    'uses'=>'Controller@session',
+));
 

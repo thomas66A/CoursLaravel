@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Requests\NewProductRequest;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -123,6 +124,14 @@ class Controller extends BaseController
             'picture' => $image
         ];
            
+    }
+
+    public function session(Request $request){
+        $request->session()->put('key','value');
+        $request->session()->put('name','thomas');
+        dump($request->session()->get('name'));
+        die();
+        return "ici ce sont les sessions";
     }
 
 }
