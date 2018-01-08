@@ -54,4 +54,8 @@ Route::post('/new-product', array(
     'as'=>'new-product',
     'uses'=>'Controller@newProductService'
 ));
+Route::get('/showproduct/{id?}', array(
+    'as'=>'showProduct',
+    'uses'=>'Controller@showProduct'
+));
 

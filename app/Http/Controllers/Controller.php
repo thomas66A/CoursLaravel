@@ -6,6 +6,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use App\Http\Controllers\File;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
@@ -104,6 +105,24 @@ class Controller extends BaseController
         return redirect()->back()->with('message','Votre produit a était enregistré!!');
         dump($r);
         die();
+    }
+
+    public function showproduct($id){
+        $product = new Product();
+        $produits = Product::where('id',$id)->get();
+        foreach ($produits as $p) {
+            $title = $p->title;
+            $description = $p->description;
+            $prix = $p->prix;
+            $image = $p->picture;
+        }
+        $tab=[
+            'title' => $title,
+            'description' =>$description,
+            'prix' => $prix,
+            'picture' => $image
+        ];
+           
     }
 
 }
