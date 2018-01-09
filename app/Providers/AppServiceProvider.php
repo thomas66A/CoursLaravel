@@ -1,9 +1,10 @@
 <?php
-
 namespace App\Providers;
+use App\Repositories\InterfaceRepository;
+use App\Repositories\OrderRepository;
+use App\Repositories\ProductRepository;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
-
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -13,9 +14,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        schema::defaultStringLength(191);
+        Schema::defaultStringLength(191);
     }
-
     /**
      * Register any application services.
      *
@@ -23,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(InterfaceRepository::class,ProductRepository::class);
+        $this->app->singleton(InterfaceRepository::class,OrderRepository::class);
     }
 }

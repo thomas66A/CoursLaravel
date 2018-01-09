@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Repositories\OrderRepository;
+use App\Repositories\ProductRepository;
 use App\Http\Requests\NewProductRequest;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -11,10 +12,17 @@ use App\Http\Controllers\File;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
+use App\Order;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    private $productRepo;
     
+    public function __construct(ProductRepository $productRepo, OrderRepository $orderRepo){
+        $this->productRepo = $productRepo;
+        $this->orderRepo = $orderRepo;
+    }
+
     public function accueil(){
         return view('index');
     }
@@ -69,10 +77,11 @@ class Controller extends BaseController
         dump($category);
     }
     public function queriesDatabase(){
-        $product = Product::all();
-        // $product[10]->delete();
-        $produit = Product::where('title','iphone 10')->get();
-        dump($produit);// recherche du nom du product en particulier[11]->title
+        // $product = Product::all();
+        // // $product[10]->delete();
+        // $produit = Product::where('title','iphone 10')->get();
+        $product = $this->productRepo->selectWithDb();
+        dump($product);
         die();
     }
     public function newProduct(){
