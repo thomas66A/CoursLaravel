@@ -63,3 +63,7 @@ Route::get('/session', array(
     'uses'=>'Controller@session',
 ));
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
